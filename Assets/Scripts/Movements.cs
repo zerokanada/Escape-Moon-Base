@@ -5,11 +5,14 @@ using UnityEngine;
 public class Movements : MonoBehaviour
 {
     Rigidbody rb;
+    AudioSource AS;
     [SerializeField] float thrustForce = 100f;
     [SerializeField] float rotateForce = 100f;
 
+
     void Start()
     {
+        AS= GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         
     }
@@ -17,16 +20,26 @@ public class Movements : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         ProcessThrust ();
         ProcessRotation ();
+
     }
 
     void ProcessThrust (){
         if (Input.GetKey(KeyCode.Space)){
-            Debug.Log("Pressed Space");
-            rb.AddRelativeForce(Vector3.up * thrustForce * Time.deltaTime) ;
+            if(!AS.isPlaying){
+                AS.Play();
+            }
+            
+            rb.AddRelativeForce(Vector3.up * thrustForce * Time.deltaTime);
 
+        }else{
+            AS.Stop();
         }
+
+
+        
     }
     void ProcessRotation (){
         
