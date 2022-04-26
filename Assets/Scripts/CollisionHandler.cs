@@ -1,5 +1,7 @@
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class CollisionHandler : MonoBehaviour
 {
@@ -10,16 +12,20 @@ public class CollisionHandler : MonoBehaviour
         switch (obstacleType){
             case "Friendly":
                 Debug.Log("You hit the Launchpad.");
-            break;
+                break;
             case "Fuel":
                 Debug.Log("You hit the Fuel.");
-            break;
+                break;
             case "Finish":
                 Debug.Log("You hit the Finish.");
-            break;
+                break;
             default:
-                Debug.Log("You hit an obstacle.");
-            break;
+                ReloadLevel();
+                
+                break;
+        }
+        void ReloadLevel(){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         
