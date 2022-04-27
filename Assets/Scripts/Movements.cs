@@ -8,7 +8,7 @@ public class Movements : MonoBehaviour
     AudioSource AS;
     [SerializeField] float thrustForce = 100f;
     [SerializeField] float rotateForce = 100f;
-
+    [SerializeField] AudioClip mainEngine;
 
     void Start()
     {
@@ -29,7 +29,7 @@ public class Movements : MonoBehaviour
     void ProcessThrust (){
         if (Input.GetKey(KeyCode.Space)){
             if(!AS.isPlaying){
-                AS.Play();
+                AS.PlayOneShot(mainEngine);
             }
             
             rb.AddRelativeForce(Vector3.up * thrustForce * Time.deltaTime);
