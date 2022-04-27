@@ -32,38 +32,61 @@ public class Movements : MonoBehaviour
     }
 
     void ProcessThrust (){
-        if (Input.GetKey(KeyCode.Space)){
-            if(!AS.isPlaying){
-                AS.PlayOneShot(mainEngine);
-            }
-            
-            mainBooster.Play();
-            
-            rb.AddRelativeForce(Vector3.up * thrustForce * Time.deltaTime);
+        if (Input.GetKey(KeyCode.Space))
+        {
+            StartThrust();
 
-        }else{
-            AS.Stop();
         }
-
-
-        
+        else
+        {
+            StopThrust();
+        }
     }
+
     void ProcessRotation (){
         
         if (Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.LeftArrow))
         {
-            rightBooster.Play();
-            ApplyRotation(rotateForce);
+            LeftRotation();
 
         }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
-            leftBooster.Play();
-            ApplyRotation(-rotateForce);
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            RightRotation();
 
         }
-        
-
     }
+
+    private void StartThrust()
+    {
+        if (!AS.isPlaying)
+        {
+            AS.PlayOneShot(mainEngine);
+        }
+
+        mainBooster.Play();
+
+        rb.AddRelativeForce(Vector3.up * thrustForce * Time.deltaTime);
+    }
+
+    private void StopThrust()
+    {
+        AS.Stop();
+    }
+
+
+    private void LeftRotation()
+    {
+        rightBooster.Play();
+        ApplyRotation(rotateForce);
+    }
+
+    private void RightRotation()
+    {
+        leftBooster.Play();
+        ApplyRotation(-rotateForce);
+    }
+
 
     void ApplyRotation(float rotationThisFrame)
     {

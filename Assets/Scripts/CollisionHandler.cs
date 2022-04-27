@@ -15,6 +15,7 @@ public class CollisionHandler : MonoBehaviour
 
     string obstacleType;
     bool isTransitioning = false;
+    bool collisionsEnabled = true;
 
     void Start()
     {
@@ -23,9 +24,21 @@ public class CollisionHandler : MonoBehaviour
           
     }
 
+    private void Update() {
+        if (Input.GetKey(KeyCode.L))
+        {
+            NextLevel();
+
+        }
+        if (Input.GetKey(KeyCode.C))
+        {
+            collisionsEnabled=!collisionsEnabled; 
+
+        }
+    }
     
     void OnCollisionEnter(Collision other) {
-        if(isTransitioning){ return; }
+        if(isTransitioning || !collisionsEnabled){ return; }
         obstacleType=other.gameObject.tag;
         switch (obstacleType){
             case "Friendly":
