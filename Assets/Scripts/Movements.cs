@@ -10,6 +10,11 @@ public class Movements : MonoBehaviour
     [SerializeField] float rotateForce = 100f;
     [SerializeField] AudioClip mainEngine;
 
+    
+    [SerializeField] ParticleSystem leftBooster;
+    [SerializeField] ParticleSystem mainBooster;
+    [SerializeField] ParticleSystem rightBooster;
+
     void Start()
     {
         AS= GetComponent<AudioSource>();
@@ -32,6 +37,8 @@ public class Movements : MonoBehaviour
                 AS.PlayOneShot(mainEngine);
             }
             
+            mainBooster.Play();
+            
             rb.AddRelativeForce(Vector3.up * thrustForce * Time.deltaTime);
 
         }else{
@@ -45,11 +52,12 @@ public class Movements : MonoBehaviour
         
         if (Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.LeftArrow))
         {
+            rightBooster.Play();
             ApplyRotation(rotateForce);
 
         }
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
-
+            leftBooster.Play();
             ApplyRotation(-rotateForce);
 
         }
