@@ -6,7 +6,7 @@ public class Oscillator : MonoBehaviour
 {
     Vector3 startingPosition;
     [SerializeField] Vector3 movementVector;
-    [SerializeField] Vector3 movementFactor;
+    [SerializeField] [Range (0,1)] float movementFactor;
     // Start is called before the first frame update
     void Start()
     {
