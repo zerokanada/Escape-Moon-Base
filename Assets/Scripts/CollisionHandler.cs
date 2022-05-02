@@ -42,7 +42,7 @@ public class CollisionHandler : MonoBehaviour
         obstacleType=other.gameObject.tag;
         switch (obstacleType){
             case "Friendly":
-                Debug.Log("You hit the Launchpad.");
+                
                 break;
             case "Finish":
                 StartSuccesssSequence();
